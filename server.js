@@ -3,6 +3,7 @@
 const Hapi = require('hapi');
 const Path = require('path');
 const Jimp = require('jimp');
+const fs = require('fs');
 
 const server = new Hapi.Server({
   connections: {
@@ -37,8 +38,22 @@ server.register(require('inert'), (err) => {
     server.route({
       method: 'POST',
       path: '/upload',
-      handler: (request, reply) => {
-        reply('upload here');
+      config: {  
+        payload:{
+          maxBytes: 209715200,
+          output:'stream',
+          parse: true
+        },
+        
+        handler: (request, reply) => {
+          request.payload['img'].pipe(fs.createWriteStream('views/imgs/test.jpg'));
+          Jimp.read('views/imgs/test.jpg').then((test) => {
+            test.resize()
+                .quality(60)          
+                .write("views/imgs/puzzle.jpg");
+            });
+          reply('upload');
+          } 
       }
     });
 
