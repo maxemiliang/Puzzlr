@@ -8,9 +8,11 @@
     "start": "node server.js"
   },
   "author": "maxemiliang",
+  "repository": "https://github.com/maxemiliang/Puzzlr.git",
   "license": "MIT",
   "dependencies": {
     "boom": "^3.2.2",
+    "file-type": "^3.8.0",
     "hapi": "^14.2.0",
     "hoek": "^4.0.2",
     "inert": "^4.0.1",

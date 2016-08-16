@@ -4,6 +4,7 @@ const Hapi = require('hapi')
 const Path = require('path')
 const Jimp = require('jimp')
 const fs = require('fs')
+const fileType = require('file-type')
 
 const server = new Hapi.Server({
   connections: {
@@ -43,13 +44,20 @@ server.register(require('inert'), (err) => {
         parse: true
       },
       handler: (request, reply) => {
-        request.payload['img'].pipe(fs.createWriteStream('views/imgs/test.jpg'));
-        Jimp.read('views/imgs/test.jpg').then((test) => {
-          test.write('views/imgs/puzzle.jpg')
-        }).catch(function (err) {
-          console.error(err)
-        })
-        reply('upload')
+        let type = fileType(request.payload['img']._data)
+        if (type.mime === 'image/jpeg' || type.mime === 'image/png') {
+          request.payload['img'].pipe(fs.createWriteStream('views/imgs/test.jpg'))
+
+          Jimp.read('views/imgs/test.jpg').then((test) => {
+            test.write('views/imgs/puzzle')
+          }).catch(function (err) {
+            console.error(err)
+          })
+
+          reply('upload')
+        } else {
+          reply.redirect('/')
+        }
       }
     }
   })
@@ -60,6 +68,16 @@ server.register(require('inert'), (err) => {
     handler: {
       directory: {
         path: 'css'
+      }
+    }
+  })
+
+  server.route({
+    method: 'GET',
+    path: '/img/{file*}',
+    handler: {
+      directory: {
+        path: 'imgs'
       }
     }
   })
@@ -77,9 +95,7 @@ server.register(require('inert'), (err) => {
       throw err
     }
 
-    console.log('Server running at:', server.info.uri);
+    console.log('Server running at:', server.info.uri)
   })
 })
-
-
 
