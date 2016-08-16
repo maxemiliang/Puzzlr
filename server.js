@@ -48,10 +48,10 @@ server.register(require('inert'), (err) => {
         handler: (request, reply) => {
           request.payload['img'].pipe(fs.createWriteStream('views/imgs/test.jpg'));
           Jimp.read('views/imgs/test.jpg').then((test) => {
-            test.resize()
-                .quality(60)          
-                .write("views/imgs/puzzle.jpg");
-            });
+            test.write("views/imgs/puzzle.jpg");
+          }).catch(function (err) {
+            console.error(err);
+          });
           reply('upload');
           } 
       }
