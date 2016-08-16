@@ -12,8 +12,10 @@
       <h1>Puzzlr</h1>
       <p>Welcome to Puzzlr, where you can create your own puzzles!</p>
       <form action="/upload" method="POST">
-        <input type="file" name="img">
-        <input type="submit" value="Upload file to ">
+        <input type="file" class="uploadFile" id="file" name="img">
+        <label id="file-label" for="file">Choose a file</label>
+        <input type="submit" class="uploadFile" id="submit-meme" value="Upload file to Puzzlr">
+        <label id="submit" for="submit-meme">Upload file to Puzzlr</label>
       </form>
     </div>      
   </body>

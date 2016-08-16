@@ -1,7 +1,44 @@
 @import 'https://fonts.googleapis.com/css?family=Inconsolata|Open+Sans';
 
+body {
+  background: lightblue;
+  font-family: 'Incosolata', monospace;
+}
+
 .container {
   padding: 30px;
+}
+
+.uploadFile + label {
+    font-size: 1.25em;
+    font-weight: 700;
+    color: white;
+    padding: 5px;
+    border-radius: 10px;
+    background-color: greenyellow;
+    display: inline-block;
+}
+
+.uploadFile:focus + label,
+.uploadFile + label:hover {
+    background-color: palegreen;
+}
+
+#submit {
+  background: lightseagreen;
+}
+
+#submit:hover {
+  background: cornflowerblue: ;
+}
+
+.uploadFile {
+	width: 0.1px;
+	height: 0.1px;
+	opacity: 0;
+	overflow: hidden;
+	position: absolute;
+	z-index: -1;
 }
 
 /* just some text styling */
