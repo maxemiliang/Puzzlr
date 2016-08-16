@@ -1,13 +1,20 @@
 <!DOCTYPE html>
 <html lang="en">
   <head>
-    <title></title>
+    <title>Puzzlr | the leading puzzle game provider</title>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1">
     <link href="css/style.css" rel="stylesheet">
     <script defer src="js/script.js"></script>
   </head>
   <body>
-    <h1>Puzzlr</h1>
+    <div class="container">
+      <h1>Puzzlr</h1>
+      <p>Welcome to Puzzlr, where you can create your own puzzles!</p>
+      <form action="/upload" method="POST">
+        <input type="file" name="img">
+        <input type="submit" value="Upload file to ">
+      </form>
+    </div>      
   </body>
 </html>
