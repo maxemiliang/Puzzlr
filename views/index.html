@@ -11,7 +11,7 @@
     <div class="container">
       <h1>Puzzlr</h1>
       <p>Welcome to Puzzlr, where you can create your own puzzles!</p>
-      <form action="/upload" method="POST">
+      <form action="/upload" method="POST" enctype="multipart/form-data">
         <input type="file" class="uploadFile" id="file" name="img">
         <label id="file-label" for="file">Choose a file</label>
         <input type="submit" class="uploadFile" id="submit-meme" value="Upload file to Puzzlr">

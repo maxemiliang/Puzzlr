@@ -2,6 +2,7 @@
 
 const Hapi = require('hapi');
 const Path = require('path');
+const Jimp = require('jimp');
 
 const server = new Hapi.Server({
   connections: {
@@ -33,6 +34,14 @@ server.register(require('inert'), (err) => {
       }
     });
 
+    server.route({
+      method: 'POST',
+      path: '/upload',
+      handler: (request, reply) => {
+        reply('upload here');
+      }
+    });
+
     server.route({  
       method: 'GET',
       path: '/css/{file*}',
@@ -56,7 +65,7 @@ server.register(require('inert'), (err) => {
         if (err) {
             throw err;
         }
-        
+
         console.log('Server running at:', server.info.uri);
     });
 });
