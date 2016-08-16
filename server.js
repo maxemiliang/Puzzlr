@@ -58,7 +58,7 @@ server.register(require('inert'), (err) => {
     method: 'GET',
     path: '/css/{file*}',
     handler: {
-      directory: { 
+      directory: {
         path: 'css'
       }
     }
