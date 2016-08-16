@@ -23,11 +23,11 @@ server.register(require('inert'), (err) => {
   if (err) {
     throw err
   }
-  server.route({  
+  server.route({
     method: 'GET',
     path: '/js/{file*}',
     handler: {
-      directory: { 
+      directory: {
         path: 'js'
       }
     }
@@ -36,10 +36,10 @@ server.register(require('inert'), (err) => {
   server.route({
     method: 'POST',
     path: '/upload',
-    config: {  
-      payload:{
+    config: {
+      payload: {
         maxBytes: 209715200,
-        output:'stream',
+        output: 'stream',
         parse: true
       },
       handler: (request, reply) => {
@@ -68,7 +68,7 @@ server.register(require('inert'), (err) => {
     method: 'GET',
     path: '/',
     handler: function (request, reply) {
-       reply.file('index.html');
+      reply.file('index.html')
     }
   })
 
