@@ -46,10 +46,9 @@ server.register(require('inert'), (err) => {
       handler: (request, reply) => {
         let type = fileType(request.payload['img']._data)
         if (type.mime === 'image/jpeg' || type.mime === 'image/png') {
-          request.payload['img'].pipe(fs.createWriteStream('views/imgs/test.jpg'))
-
-          Jimp.read('views/imgs/test.jpg').then((test) => {
-            test.write('views/imgs/puzzle')
+          request.payload['img'].pipe(fs.createWriteStream('views/imgs/' + request.payload['img'].hapi.filename))
+          Jimp.read('views/imgs/' + request.payload['img'].hapi.filename).then((test) => {
+            test.write('views/img/test.jpg')
           }).catch(function (err) {
             console.error(err)
           })
