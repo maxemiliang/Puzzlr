@@ -1,5 +1,6 @@
 let time = 1
 let used_nums = []
+let allSnap = []
 
 // inefficient, men de funkar
 for (var i = 1; i < 26; i++) {
@@ -38,9 +39,14 @@ $('.dragme').draggable({
     let snappedTo = $.map(snapped, element => {
       return element.snapping ? element.item : null
     })
-
-    console.log(snappedTo)
-
-    }
+    let sid = id.substr(id.length - 1)
+    allSnap[sid - 1] = snappedTo
+    didWin(allSnap)
+  }
 })
+
+
+function didWin(snaps) {
+  let snap = snaps
+}
 
