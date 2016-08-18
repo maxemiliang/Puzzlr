@@ -3,7 +3,6 @@
 const Hapi = require('hapi')
 const Path = require('path')
 const Jimp = require('jimp')
-const fs = require('fs')
 const fileType = require('file-type')
 
 const server = new Hapi.Server({
@@ -44,20 +43,64 @@ server.register(require('inert'), (err) => {
         parse: true
       },
       handler: (request, reply) => {
-        let type = fileType(request.payload['img']._data)
-        if (type.mime === 'image/jpeg' || type.mime === 'image/png') {
-          request.payload['img'].pipe(fs.createWriteStream('views/imgs/' + request.payload['img'].hapi.filename))
-          Jimp.read('views/imgs/' + request.payload['img'].hapi.filename).then((test) => {
-            test.write('views/img/test.jpg')
+        let file = fileType(request.payload['img']._data).mime
+        if (file === 'image/png' || file === 'image/jpeg') {
+          Jimp.read(request.payload['img']._data).then((test) => {
+            let w = test.bitmap.width
+            let h = test.bitmap.height
+            let time = 0
+            for (let i = 1; i < 26; i++) {
+              let clone = test.clone().autocrop()
+              if (i <= 5) { // första
+                clone.crop(((w / 5) * time), 0, (w / 5), (h / 5)).write('views/imgs/img' + i + '.png')
+                time++
+                if (i === 5) {
+                  time = 0
+                }
+              } else if (i > 5 && i <= 10) { // andra
+                clone.crop(((w / 5) * time), (h / 5), (w / 5), (h / 5)).write('views/imgs/img' + i + '.png')
+                time++
+                if (i === 10) {
+                  time = 0
+                }
+              } else if (i > 10 && i <= 15) { // tredje
+                clone.crop(((w / 5) * time), ((h / 5) * 2), (w / 5), (h / 5)).write('views/imgs/img' + i + '.png')
+                time++
+                if (i === 15) {
+                  time = 0
+                }
+              } else if (i > 15 && i <= 20) { // fjärde
+                clone.crop(((w / 5) * time), ((h / 5) * 3), (w / 5), (h / 5)).write('views/imgs/img' + i + '.png')
+                time++
+                if (i === 20) {
+                  time = 0
+                }
+              } else if (i > 20) { // femte
+                clone.crop(((w / 5) * time), ((h / 5) * 4), (w / 5), (h / 5)).write('views/imgs/img' + i + '.png')
+                time++
+                if (i === 25) {
+                  time = 0
+                }
+              }
+            }
           }).catch(function (err) {
             console.error(err)
           })
 
-          reply('upload')
+          reply().redirect('/puzzle')
+
         } else {
-          reply.redirect('/')
+          reply('rip')
         }
       }
+    }
+  })
+
+  server.route({
+    method: 'GET',
+    path: '/puzzle',
+    handler: (request, reply) => {
+      reply.file('puzzle.html')
     }
   })
 
@@ -84,7 +127,7 @@ server.register(require('inert'), (err) => {
   server.route({
     method: 'GET',
     path: '/',
-    handler: function (request, reply) {
+    handler: (request, reply) => {
       reply.file('index.html')
     }
   })

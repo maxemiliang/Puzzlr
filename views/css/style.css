@@ -9,6 +9,19 @@ body {
   padding: 30px;
 }
 
+.puzzle {
+	border: 1px solid lawngreen;
+	width: auto;
+}
+
+.dragme {
+	max-width: 100%;
+}
+
+img {
+	margin: 0px;
+}
+
 .uploadFile + label {
     font-size: 1.25em;
     font-weight: 700;
