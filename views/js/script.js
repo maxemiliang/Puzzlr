@@ -46,7 +46,21 @@ $('.dragme').draggable({
 })
 
 
-function didWin(snaps) {
+function didWin (snaps) {
   let snap = snaps
+  console.log(G(snap[0]))
 }
 
+// gettar endast ett nummer från en array med snappade saker
+function G (arr) {
+  if (arr !== undefined) {
+    let numbers = []
+    for (var i = 0; i < arr.length; i++) {
+      let id = arr[i].id
+      numbers.push(id)
+    }
+    return numbers
+  } else {
+    return false
+  }
+}

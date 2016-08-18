@@ -10,8 +10,9 @@ body {
 }
 
 .puzzle {
-	border: 1px solid lawngreen;
+	border: 2px solid dodgerblue;
 	width: auto;
+	height: auto;
 }
 
 .dragme {
