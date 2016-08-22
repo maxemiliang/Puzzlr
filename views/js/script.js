@@ -39,9 +39,15 @@ $('.dragme').draggable({
     let snappedTo = $.map(snapped, element => {
       return element.snapping ? element.item : null
     })
-    let sid = id.substr(id.length - 1)
-    allSnap[sid - 1] = snappedTo
-    didWin(allSnap)
+    let sid = id.substr(id.length - 2)
+    if (!isNaN(sid)) {
+      allSnap[sid - 1] = snappedTo
+      didWin(allSnap)
+    } else {
+      sid = id.substr(id.length - 1)
+      allSnap[sid - 1] = snappedTo
+      didWin(allSnap)
+    }
   }
 })
 
