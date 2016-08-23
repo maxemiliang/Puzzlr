@@ -22,6 +22,15 @@ img {
 	margin: 0px;
 }
 
+.grid {
+	white-space: nowrap;
+	display: inline;
+}
+
+.dropme {
+	display: inline-block;
+}
+
 .uploadFile + label {
     font-size: 1.25em;
     font-weight: 700;
