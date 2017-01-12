@@ -1,1 +1,3 @@
-#this is gonna eventually be a cool puzzle game maker
+#Puzzlr
+
+The simple puzzle maker made in NodeJS
