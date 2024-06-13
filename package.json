@@ -12,10 +12,10 @@
   "license": "MIT",
   "dependencies": {
     "boom": "^3.2.2",
-    "file-type": "^3.8.0",
+    "file-type": "^16.5.4",
     "hapi": "^14.2.0",
     "hoek": "^5.0.2",
     "inert": "^4.0.1",
-    "jimp": "^0.2.27"
+    "jimp": "^0.3.7"
   }
 }
